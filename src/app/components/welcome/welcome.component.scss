@@ -1,0 +1,53 @@
+mat-icon {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+:host {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  transition: justify-content 0.3s ease;
+}
+
+p {
+  font-size: 2rem;
+  padding: 0;
+  margin: 0;
+}
+
+.arrow-right {
+  transform: translateX(50px); /* Move a seta para a direita */
+  transition: transform 0.3s ease;
+}
+
+.dash {
+  font-size: 2rem;
+  margin-left: 10px;
+}
+
+.hiddenArrow {
+  display: none;
+}
+
+button {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.container {
+  flex-direction: row; /* Move os itens para a esquerda quando a seta aparecer */
+}
