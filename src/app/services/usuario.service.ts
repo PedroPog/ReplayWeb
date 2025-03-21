@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -32,10 +32,29 @@ export class UsuarioService {
 
   onLogin(email:string,senha:string){
     return signInWithEmailAndPassword(
-      this.auth,email,senha).then(
+      this.auth,email,senha)
+      .then(
         (userCredential)=>{
-          const usuario = userCredential
+          const usuario = userCredential.user;
+          if(!usuario.emailVerified){
+            sendEmailVerification(usuario)
+            return usuario.email;
+          }
+          return usuario;
         }
       )
+      .catch((error)=>{
+        return error.message;
+      }
+    );
+  }
+
+  onLogout(){
+    return signOut(this.auth).then(()=>{
+      return "Realizado logouat com sucesso!"
+    })
+    .catch((error)=>{
+      return "Falha no logouat: "+error.message
+    })
   }
 }
