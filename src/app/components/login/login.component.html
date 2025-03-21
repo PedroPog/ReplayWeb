@@ -1,5 +1,6 @@
 <mat-card>
   <form [formGroup]="loginForm">
+    <h1>Login</h1>
 
     <mat-form-field appearance="outline">
       <mat-label>Email: </mat-label>
@@ -21,5 +22,7 @@
 
     <button mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid"
       (click)="onlogin()">Logar</button>
+
+    <p>Ainda não uma conta <a routerLink="/register">clique aqui!</a></p>
   </form>
 </mat-card>

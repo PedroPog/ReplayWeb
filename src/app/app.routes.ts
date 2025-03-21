@@ -6,6 +6,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ListaItemComponent } from './components/home/components/lista-item/lista-item.component';
 import { PageHomeComponent } from './components/home/components/page-home/page-home.component';
+import { RegisterStepOneComponent } from './components/register/components/register-step-one/register-step-one.component';
+import { RegisterStepTwoComponent } from './components/register/components/register-step-two/register-step-two.component';
 
 export const routes: Routes = [
   {
@@ -37,7 +39,16 @@ export const routes: Routes = [
   },
   {
     path:'register',component:RegisterComponent,
-    data:{titulo:'Register'}
+    children:[
+      {
+        path:'',component:RegisterStepOneComponent,
+        data:{titulo:'Register'}
+      },
+      {
+        path:'step',component:RegisterStepTwoComponent,
+        data:{titulo:'Register -- etapa 2'}
+      },
+    ]
   },
   {
     path:'**',component:NotFoundComponent,

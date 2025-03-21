@@ -1,0 +1,16 @@
+<form>
+  <img [src]="imagePreview" alt="avatar" />
+
+  <mat-form-field appearance="outline">
+    <input matNativeControl type="url" accept="image/*" (change)="onFileSelected($event)">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Display Name</mat-label>
+    <input matInput type="text" placeholder="Digite o seu nome">
+  </mat-form-field>
+
+  <button mat-flat-button color="primary" type="submit">
+    Registrar
+  </button>
+</form>

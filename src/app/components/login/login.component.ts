@@ -7,6 +7,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsuarioService } from '../../services/usuario.service';
+import { SessaoService } from '../../services/sessao.service';
+import { Usuario } from '../../models/usuario.model';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +20,8 @@ import { UsuarioService } from '../../services/usuario.service';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -26,9 +30,13 @@ export class LoginComponent {
   visible: boolean = false;
 
   constructor(
-    private service:UsuarioService
+    private service:UsuarioService,
+    private sessao:SessaoService,
+    private router:Router
   ){
-
+    if(this.sessao.obterUsuario()!=null){
+      this.router.navigate(['/home']);
+    }
   }
 
   loginForm = new FormGroup({
@@ -43,12 +51,16 @@ export class LoginComponent {
       const email = this.loginForm.get('email')?.value as string;
       const senha = this.loginForm.get('senha')?.value as string;
       this.service.onLogin(email,senha).then((res)=>{
-        console.log(res);
+        if (typeof res === 'string') {
+          console.log("Erro: " + res);  // Mensagem de erro
+        } else {
+          this.sessao.salvarSessao(res);
+          this.router.navigate(['/home']);
+        }
       },
       (error)=>{
         console.log("error: "+error);
-      }
-    )
+      });
     }
   }
 

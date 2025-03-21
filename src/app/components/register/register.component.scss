@@ -1,0 +1,16 @@
+:host {
+  padding: 5%;
+  background-color: wheat;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row-reverse; // inverte tela
+  .mat-mdc-card {
+    background-color: white;
+    width: 50%;
+    height: 100%;
+    padding: 2%;
+
+  }
+
+}
