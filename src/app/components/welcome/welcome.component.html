@@ -2,10 +2,9 @@
 <div class="container">
   <p>Bem vindo!</p>
   @if(hiddenArrow){
-    <mat-icon class="arrow-right">arrow_forward</mat-icon>
+    <mat-icon [routerLink]="['/login']" class="arrow-right">arrow_forward</mat-icon>
   }
   @if(hiddenArrow){
     <span class="dash">|</span>
   }
-
 </div>

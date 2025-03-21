@@ -1,1 +1,25 @@
-<p>login works!</p>
+<mat-card>
+  <section [formGroup]="loginForm">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email: </mat-label>
+      <input matInput type="email" autocomplete="email" formControlName="email"
+         placeholder="Digite seu email de login." required>
+      <mat-icon matSuffix>mail</mat-icon>
+      <mat-error>{{ loginForm.controls.email.hasError('required') ? 'Email obrigatório!' : 'Email inválido!' }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Senha: </mat-label>
+      <input matInput [type]="!visible ? 'password':'text'" autocomplete="current-password"
+          placeholder="Digite a senha de login." required formControlName="senha">
+      <mat-icon matSuffix (click)="visible=!visible">{{ visible ? 'visibility_off' : 'visibility' }}</mat-icon>
+      <mat-error>
+        {{ loginForm.controls.senha.hasError('required') ? 'Senha obrigatória!' : 'A senha deve ter no mínimo 6 caracteres!' }}
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-flat-button color="primary" [disabled]="loginForm.invalid"
+      (click)="onlogin()">Logar</button>
+  </section>
+</mat-card>

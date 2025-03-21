@@ -4,6 +4,8 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ListaItemComponent } from './components/home/components/lista-item/lista-item.component';
+import { PageHomeComponent } from './components/home/components/page-home/page-home.component';
 
 export const routes: Routes = [
   {
@@ -17,7 +19,17 @@ export const routes: Routes = [
   },
   {
     path:'home',component:HomeComponent,
-    data:{titulo:'Home'}
+    children:[
+      {
+        path:'',component:PageHomeComponent,data:{titulo:'Home'}
+      },
+      {
+        path:'list',component:ListaItemComponent,data:{titulo:'Lista videos'}
+      },
+      {
+        path:'detalhes-item',component:ListaItemComponent,data:{titulo:'Detalhes videos'}
+      }
+    ]
   },
   {
     path:'login',component:LoginComponent,
