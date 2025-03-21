@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +25,12 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class LoginComponent {
   visible: boolean = false;
 
+  constructor(
+    private service:UsuarioService
+  ){
+
+  }
+
   loginForm = new FormGroup({
     email: new FormControl('',[Validators.required,Validators.email]),
     senha: new FormControl('',[Validators.required,Validators.minLength(6)])
@@ -32,7 +39,16 @@ export class LoginComponent {
 
   onlogin(){
     if(this.loginForm.valid){
-      console.log("Login efetuado com sucesso!", this.loginForm.value);
+      //console.log("Login efetuado com sucesso!", this.loginForm.value);
+      const email = this.loginForm.get('email')?.value as string;
+      const senha = this.loginForm.get('senha')?.value as string;
+      this.service.onLogin(email,senha).then((res)=>{
+        console.log(res);
+      },
+      (error)=>{
+        console.log("error: "+error);
+      }
+    )
     }
   }
 
