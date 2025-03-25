@@ -49,7 +49,7 @@ export class RegisterStepOneComponent {
           console.log("Erro: " + res);  // Mensagem de erro
         } else {
           this.sessao.salvarSessao(res);
-          this.router.navigate(['step']);
+          this.router.navigate(['register/step']);
         }
       },
       (error)=>{

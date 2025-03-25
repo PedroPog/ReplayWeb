@@ -1,14 +1,18 @@
 import { inject, Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut, updateCurrentUser, updateProfile, User } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification,
+   signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
 import { Usuario } from '../models/usuario.model';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-  private auth: Auth = inject(Auth); // Injeta a instância correta do Firebase Auth
+
+  private auth: Auth = inject(Auth); // Injeta a instância do Firebase Auth
+  private storage = getStorage(); // Injeta a instância do Firebase Storage
 
   constructor() {}
 
@@ -81,6 +85,29 @@ export class UsuarioService {
       return "Logout realizado com sucesso!";
     } catch (error: any) {
       return `Falha no logout: ${error.message}`;
+    }
+  }
+
+  verificarEmail(): Promise<boolean> {
+    return new Promise((resolve) => {
+      const authUser = this.auth.currentUser;
+      if (authUser) {
+        resolve(authUser.emailVerified);
+      } else {
+        resolve(false); // Retorna false se o usuário não estiver autenticado
+      }
+    });
+  }
+
+
+  async uploadImage(selectedFile: File,uuid:string): Promise<string> {
+    try{
+      const storageRef = ref(this.storage,`user_images/${uuid}/${selectedFile.name}`);
+      const snapshot = await uploadBytes(storageRef,selectedFile);
+      const downloadURL = await getDownloadURL(snapshot.ref);
+      return downloadURL;
+    }catch(error:any){
+      throw new Error(`Erro ao fazer upload da imagem: ${error.message}`);
     }
   }
 }

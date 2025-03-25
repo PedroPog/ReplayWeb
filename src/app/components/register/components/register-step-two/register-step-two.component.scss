@@ -11,11 +11,13 @@ form {
   height: 100%;
   padding: 0 25%;
   align-items: center;
+  justify-content: space-evenly;
 
   img {
     width: 70%;
     height: 45%;
-    background-color: aquamarine;
+    box-shadow: 1px 1px 1px 1px #00000066;
     border-radius: 100%;
+    cursor: pointer; // Torna a imagem clicável
   }
 }

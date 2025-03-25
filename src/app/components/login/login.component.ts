@@ -10,6 +10,7 @@ import { UsuarioService } from '../../services/usuario.service';
 import { SessaoService } from '../../services/sessao.service';
 import { Usuario } from '../../models/usuario.model';
 import { Router, RouterModule } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,8 @@ export class LoginComponent {
   constructor(
     private service:UsuarioService,
     private sessao:SessaoService,
-    private router:Router
+    private router:Router,
+    private _snack:MatSnackBar
   ){
     if(this.sessao.obterUsuario()!=null){
       this.router.navigate(['/home']);
@@ -53,6 +55,7 @@ export class LoginComponent {
       this.service.onLogin(email,senha).then((res)=>{
         if (typeof res === 'string') {
           console.log("Erro: " + res);  // Mensagem de erro
+          this._snack.open(res,"OK",{horizontalPosition:'end',verticalPosition:'bottom',duration:5000})
         } else {
           this.sessao.salvarSessao(res);
           this.router.navigate(['/home']);
