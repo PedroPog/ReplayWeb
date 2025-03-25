@@ -8,6 +8,7 @@ import { ListaItemComponent } from './components/home/components/lista-item/list
 import { PageHomeComponent } from './components/home/components/page-home/page-home.component';
 import { RegisterStepOneComponent } from './components/register/components/register-step-one/register-step-one.component';
 import { RegisterStepTwoComponent } from './components/register/components/register-step-two/register-step-two.component';
+import { DetalhesItemComponent } from './components/home/components/detalhes-item/detalhes-item.component';
 
 export const routes: Routes = [
   {
@@ -29,7 +30,7 @@ export const routes: Routes = [
         path:'list',component:ListaItemComponent,data:{titulo:'Lista videos'}
       },
       {
-        path:'detalhes-item',component:ListaItemComponent,data:{titulo:'Detalhes videos'}
+        path:'detalhes-item',component:DetalhesItemComponent,data:{titulo:'Detalhes videos'}
       }
     ]
   },

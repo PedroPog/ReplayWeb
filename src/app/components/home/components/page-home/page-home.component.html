@@ -1,1 +1,23 @@
-<p>page-home works!</p>
+<section class="filtros">
+
+  <mat-form-field appearance="outline" >
+    <mat-label>Filtro One</mat-label>
+    <mat-select>
+      @for(itens of filtroOne;track itens){
+        <mat-option>{{itens}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+</section>
+<section class="content">
+  <lista-item></lista-item>
+</section>
+<section class="footbar">
+
+  <span>
+    <a target="_blank" href="https://github.com/PedroPog">PedroPog </a>
+    - {{year}}
+  </span>
+
+</section>
