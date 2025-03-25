@@ -1,4 +1,8 @@
 <mat-toolbar color="primary">
   <span>HOME</span>
+  <button mat-flat-button color="accent">
+    {{usuario?.displayName}}
+    <mat-icon>logout</mat-icon>
+  </button>
 </mat-toolbar>
 <router-outlet ></router-outlet>
