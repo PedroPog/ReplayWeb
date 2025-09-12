@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'lista-item',
@@ -8,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './lista-item.component.scss'
 })
 export class ListaItemComponent {
+
+  @Input() imagemUrl: any;
+  @Input() title: any;
+  @Input() descricao: any;
 
 }
